@@ -1,0 +1,5 @@
+{
+    "sketch": "src\\emonTxV3_4_3Phase_Voltage\\emonTxV3_4_3Phase_Voltage.ino",
+    "board": "arduino:avr:uno",
+    "port": "COM3"
+}

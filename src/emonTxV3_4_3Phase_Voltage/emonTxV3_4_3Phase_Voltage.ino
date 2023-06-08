@@ -124,15 +124,15 @@ emonhub.conf node decoder settings for this sketch:
 
 
 */
-// #define DEBUGGING                             // enable this line to include debugging print statements
+#define DEBUGGING                             // enable this line to include debugging print statements
                                                  //  This is turned off when SERIALOUT or EMONESP (see below) is defined.
 
 #define SERIALPRINT                              // include 'human-friendly' print statement for commissioning - comment this line to exclude.
                                                  //  This is turned off when SERIALOUT or EMONESP (see below) is defined.
 
-#define USEPULSECOUNT                            // include the ability to count pulses. Comment this line if pulse counting is not required.
-#define PULSEINT 1                               // Interrupt no. for pulse counting: EmonTx V2 = 1, EmonTx V3.2(RFu) = 0, EmonTx V3.4 = 1, EmonTx Shield - see Wiki
-#define PULSEPIN 3                               // Interrupt input pin: EmonTx V2 = 3, EmonTx V3.2(RFu) = 2, EmonTx V3.4 = 3, EmonTx Shield - see Wiki
+//#define USEPULSECOUNT                            // include the ability to count pulses. Comment this line if pulse counting is not required.
+#define PULSEINT 0                               // Interrupt no. for pulse counting: EmonTx V2 = 1, EmonTx V3.2(RFu) = 0, EmonTx V3.4 = 1, EmonTx Shield - see Wiki
+#define PULSEPIN 2                               // Interrupt input pin: EmonTx V2 = 3, EmonTx V3.2(RFu) = 2, EmonTx V3.4 = 3, EmonTx Shield - see Wiki
                                                  //  Also, set the PulseMinPeriod (below) for contact debouncing.
 
 
@@ -162,7 +162,7 @@ emonhub.conf node decoder settings for this sketch:
 #define EMONTX_V3                                // The type of emonTx - can be EMONTX_V3 (for V3.2 & V3.4) or EMONTX_SHIELD (all versions)
                                                  //   You must have one or the other.
 
-#define RFM69CW                                  // The type of Radio Module, can be RFM69CW or RFM12B, 
+#define RFM12B                                  // The type of Radio Module, can be RFM69CW or RFM12B, 
                                                  //   or SERIALOUT if a wired serial connection is used 
                                                  //   or EMONESP if an ESP WiFi module is used
                                                  //     (see http://openenergymonitor.org/emonnode/3872) 
@@ -180,9 +180,9 @@ emonhub.conf node decoder settings for this sketch:
 
 #define RFPWR 0x99                               // Transmitter power: 0x9F = +13 dBm (max) (see notes in comment above)
                                                  
-#define RFMSELPIN 10                             // Pins for the RFM Radio module  
+#define RFMSELPIN 4                             // Pins for the RFM Radio module  
                                                  // EmonTx V2 = 10, EmonTx V3.2(RFu) = 4, EmonTx V3.4 = 10, EmonTx Shield = 5 or 10 (depending on jumper setting)
-#define RFMIRQPIN 2                              // Pins for the RFM Radio module:
+#define RFMIRQPIN 3                              // Pins for the RFM Radio module:
                                                  // EmonTx V2 = 2, EmonTx V3.2(RFu) = 3, EmonTx V3.4 = 2, EmonTx Shield = 2 or 3 (depending on jumper setting)
 
 #define DS18B20_PWR 19                           // DS18B20 Power pin - all versions
@@ -204,15 +204,15 @@ const int UNO = 1;                               // Set to 0 if you are not usin
                                                  // OpenEnergyMonitor come with Arduino Uno bootloader
 const byte TIME_BETWEEN_READINGS = 10;           // Time between readings   
 
-#define CT4LINE 1                                // Set this to 1, 2, or 3 depending on the Line to which the CT4 load is connected.
+//#define CT4LINE 1                                // Set this to 1, 2, or 3 depending on the Line to which the CT4 load is connected.
                                                  //  The default is 1
                                                  // DO NOT DEFINE CT4LINE if the 4th CT is not to be used.
                                                  // The timing values "PHASE2", "PHASE3", "Phasecal2" & "Phasecal3" will be different 
                                                  //  depending on whether CT 4 is used or not.
                                                  
-#define PHASE2 6                                 //  Number of samples delay for L2
+#define PHASE2 2                                 //  Number of samples delay for L2
 
-#define PHASE3 14                                //  Number of samples delay for L3
+#define PHASE3 17                                //  Number of samples delay for L3
                                                  //  These can be adjusted if the phase correction is not adequate
                                                  //  Suggested starting values for 3 ct's  [4 ct's]:
                                                  //    PHASE2                         7    [   6  ]
@@ -229,7 +229,7 @@ const byte TIME_BETWEEN_READINGS = 10;           // Time between readings
 
 // Calibration coefficients for emonTx V3
 // These need to be set in order to obtain accurate results
-double Vcal = 276.9;                             // Calibration constant for voltage input
+double Vcal = 252.2; //276.9;                             // Calibration constant for voltage input
 double Ical1 = 90.9;                             // Calibration constant for current transformer 1
 double Ical2 = 90.9;                             // Calibration constant for current transformer 2
 double Ical3 = 90.9;                             // Calibration constant for current transformer 3
@@ -250,9 +250,9 @@ double Ical4 = 16.6;                             // Calibration constant for cur
 #endif
 
 // Calibration coefficients common to all versions - see comments above
-double Phasecal1 = 1.00;                         // Calibration constant for phase shift L1 
-double Phasecal2 = 0.60;                         // Calibration constant for phase shift L2
-double Phasecal3 = 0.08;                         // Calibration constant for phase shift L3 
+double Phasecal1 = 1.00;                        // Calibration constant for phase shift L1 
+double Phasecal2 = 0.05; //0.60;                         // Calibration constant for phase shift L2
+double Phasecal3 = 0.00; //0.08;                         // Calibration constant for phase shift L3 
 double Phasecal4 = 1.10;                         // Calibration constant for phase shift CT 4
 
 
